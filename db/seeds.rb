@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+alphabet = ('a'..'z').to_a
+
+# alphabet.each { |letter|
+#   DreamTag.createDreamTagsFromPage(letter)
+# }
