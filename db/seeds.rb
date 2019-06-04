@@ -7,6 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 alphabet = ('a'..'z').to_a
 
-# alphabet.each { |letter|
-#   DreamTag.createDreamTagsFromPage(letter)
-# }
+alphabet.each { |letter|
+  DreamTag.createDreamTagsFromPage(letter)
+}
