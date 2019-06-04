@@ -12,4 +12,28 @@ class DreamTag < ApplicationRecord
       DreamTag.create(tag_name: tag_name, interpretation: interpretation, source: source)
     }
   end
+
+  def self.fixInterpretations
+    self.all.each { |dream_tag|
+      if dream_tag.interpretation.include?(" See ") || dream_tag.interpretation.include?(" Also see ")
+        new_interpretation = dream_tag.interpretation.split(" See ").first
+        new_interpretation = new_interpretation.split(" Also see ").first
+        dream_tag.update(interpretation: new_interpretation)
+      end
+    }
+  end
+
+  def get_JSON_response(url)
+    response = RestClient.get(url,
+      headers={
+        
+      }
+    )
+    parsed = JSON.parse(response)
+    return parsed
+  end
+
+  def getImageUrl
+
+  end
 end
