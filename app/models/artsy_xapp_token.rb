@@ -11,4 +11,8 @@ class ArtsyXappToken < ApplicationRecord
   def expired?
     ArtsyXappToken.all.last
   end
+
+  def self.latest_artsy_toke
+    ArtsyXappToken.all.last.token
+  end
 end
