@@ -12,7 +12,7 @@ class ArtsyXappToken < ApplicationRecord
     ArtsyXappToken.all.last
   end
 
-  def self.latest_artsy_toke
+  def self.latest_artsy_token
     ArtsyXappToken.all.last.token
   end
 end

@@ -31,9 +31,10 @@ class DreamTag < ApplicationRecord
 
   def get_artsy_JSON_response(url)
     response = RestClient.get(url, headers={
-      "X-Xapp-Token" => ArtsyXappToken.latest_artsy_toke
+      "X-Xapp-Token" => ArtsyXappToken.latest_artsy_token
       })
     parsed = JSON.parse(response)
+
     parsed
   end
 
@@ -49,19 +50,23 @@ class DreamTag < ApplicationRecord
     }
   end
 
-  def get_image_url_from_artsy
-    resp = self.get_artsy_JSON_response("https://api.artsy.net/api/search?q=#{self.tag_name}")["_embedded"]["results"]
-    new_img = resp.find { |result|
-      result["_links"]["thumbnail"] && result["_links"]["thumbnail"]["href"] != "/assets/shared/missing_image.png"
-    }["_links"]
-    self.update(img_url: new_img["thumbnail"]["href"], img_source: new_img["permalink"]["href"])
+  def get_image_url_from_artsy(offset=0)
+    resp = self.get_artsy_JSON_response("https://api.artsy.net/api/search?q=dream&offset=#{offset}")["_embedded"]["results"] # #{self.tag_name}
+    if !resp.empty?
+      new_img = resp.find { |result|
+          result["_links"]["thumbnail"] && result["_links"]["thumbnail"]["href"] != "/assets/shared/missing_image.png"
+        }["_links"]
+        self.update(img_url: new_img["thumbnail"]["href"], img_source: new_img["permalink"]["href"])
+    end
   end
 
   def self.replace_img_urls_from_artsy
-    tags_to_update =   DreamTag.all.where(change_image: true) #DreamTag.all.where(img_url: nil)
-    tags_to_update.each { |tag|
-      tag.get_image_url_from_artsy
+    tags_to_update =  DreamTag.all.where(change_image: true)  # DreamTag.all.where(img_url: nil)
+    tags_to_update.each { |tag, i|
+      tag.get_image_url_from_artsy(i)
       tag.update(change_image: false)
     }
   end
+
+
 end
