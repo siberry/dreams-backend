@@ -47,3 +47,5 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem "nokogiri", "~> 1.10"
 
 gem "rest-client", "~> 2.0"
+
+gem "jwt", "~> 2.2"

@@ -10,4 +10,18 @@ class UsersController < ApplicationController
      # does this work??
     # render json: user && user.authenticate(params[:password])
   end
+
+  def create
+		user = User.new(
+			username: params[:username],
+			password: params[:password]
+		)
+		if user.save
+			token = encode_token(user)
+
+			render json: {user: UserSerializer.new(user), token: token}
+		else
+			render json: {errors: user.errors.full_messages}
+		end
+	end
 end
