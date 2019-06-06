@@ -1,0 +1,2 @@
+class SpecificDreamTagsController < ApplicationController
+end
