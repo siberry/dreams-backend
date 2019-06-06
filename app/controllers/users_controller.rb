@@ -2,7 +2,9 @@ class UsersController < ApplicationController
   def login
     user = User.find_by(username: params[:username])
     if user && user.authenticate(params[:password])
-      render json: user
+      token = encode_token(user)
+
+			render json: {user: UserSerializer.new(user), token: token}
     else
       render json: {errors: "username or password is incorrect"}
     end
@@ -24,4 +26,13 @@ class UsersController < ApplicationController
 			render json: {errors: user.errors.full_messages}
 		end
 	end
+
+  def auto_login
+    user = session_user
+    if user
+      render json: user
+    else
+      render json: {errors: "User not logged in"}
+    end
+  end
 end

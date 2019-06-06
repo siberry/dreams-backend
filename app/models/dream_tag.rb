@@ -8,7 +8,6 @@ class DreamTag < ApplicationRecord
     parsed.each { |element|
       tag_name = element.css("h4").children.first.text.lstrip
       interpretation = element.css(".dictionary_results_content p").text
-
       DreamTag.create(tag_name: tag_name, interpretation: interpretation, source: source)
     }
   end
@@ -23,10 +22,18 @@ class DreamTag < ApplicationRecord
     }
   end
 
-  def get_pixabay_JSON_response(url)
+  def get_pixabay_JSON_response(url) # my API key expired
     response = RestClient.get(url)
     parsed = JSON.parse(response)
     parsed
+  end
+
+  def self.remove_pixabay_images
+    self.all.select { |tag|
+      if tag.img_url
+        tag.img_url.include?("pixabay")
+      end
+    }.each { |tag| tag.update(img_url: "", change_image: true) }
   end
 
   def get_artsy_JSON_response(url)
@@ -51,7 +58,8 @@ class DreamTag < ApplicationRecord
   end
 
   def get_image_url_from_artsy(offset=0)
-    resp = self.get_artsy_JSON_response("https://api.artsy.net/api/search?q=dream&offset=#{offset}")["_embedded"]["results"] # #{self.tag_name}
+    search_term = self.tag_name.split(" ").first
+    resp = self.get_artsy_JSON_response("https://api.artsy.net/api/search?q=#{search_term}&offset=#{offset}")["_embedded"]["results"] # #{self.tag_name}
     if !resp.empty?
       new_img = resp.find { |result|
           result["_links"]["thumbnail"] && result["_links"]["thumbnail"]["href"] != "/assets/shared/missing_image.png"
@@ -61,11 +69,15 @@ class DreamTag < ApplicationRecord
   end
 
   def self.replace_img_urls_from_artsy
-    tags_to_update =  DreamTag.all.where(change_image: true)  # DreamTag.all.where(img_url: nil)
-    tags_to_update.each { |tag, i|
-      tag.get_image_url_from_artsy(i)
+    tags_to_update =  DreamTag.all.where(change_image: nil)  # DreamTag.all.where(img_url: nil)
+    tags_to_update.each { |tag|
+      tag.get_image_url_from_artsy
       tag.update(change_image: false)
     }
+  end
+
+  def DreamTag.change_img(id, url, source="")
+    DreamTag.find(id).update(img_url: url, img_source: source, change_image: false)
   end
 
 
