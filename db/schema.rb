@@ -34,11 +34,11 @@ ActiveRecord::Schema.define(version: 2019_06_06_213406) do
   end
 
   create_table "dreams", force: :cascade do |t|
+    t.string "dream"
     t.string "date"
     t.integer "hours_slept"
     t.string "quality"
     t.string "state_of_mind"
-    t.string "inspiration"
     t.string "image_url"
     t.bigint "user_id"
     t.datetime "created_at", null: false
