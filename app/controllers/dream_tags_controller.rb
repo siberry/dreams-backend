@@ -11,7 +11,7 @@ class DreamTagsController < ApplicationController
 
   def update
     dream_tag = DreamTag.find(params[:id])
-    dream_tag.update(change_image: params.require("change_image"))
+    dream_tag.update(change_image: params.require("change_image"), img_url: "")
   end
 
   def get_dreams_by_letter
