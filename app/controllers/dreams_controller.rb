@@ -10,4 +10,5 @@ class DreamsController < ApplicationController
 
     render json: dream
   end
+
 end
