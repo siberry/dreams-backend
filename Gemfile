@@ -49,3 +49,5 @@ gem "nokogiri", "~> 1.10"
 gem "rest-client", "~> 2.0"
 
 gem "jwt", "~> 2.2"
+
+gem "faker", "~> 1.9"

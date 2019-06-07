@@ -1,12 +1,14 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
+# alphabet = ('a'..'z').to_a
 #
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-alphabet = ('a'..'z').to_a
+# alphabet.each { |letter|
+#   DreamTag.createDreamTagsFromPage(letter)
+# }
 
-alphabet.each { |letter|
-  DreamTag.createDreamTagsFromPage(letter)
-}
+# dream
+  # t.string "dream"
+  # t.string "date"
+  # t.integer "hours_slept"
+  # t.string "quality"
+  # t.string "state_of_mind"
+  # t.string "image_url"
+  # t.bigint "user_id"
