@@ -11,6 +11,14 @@ class DreamsController < ApplicationController
     render json: dream
   end
 
+  def show
+    dream = Dream.find(params[:id])
+    render json: dream
+  end
 
+  def update
+    byebug
+    dream = Dream.update()
+  end
 
 end

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   # get "/dream_tags/:letter", to: "dream_tags#get_dreams_by_letter"
   # resources :specific_dream_tags
-  resources :dreams, only: [:index, :create]
+  resources :dreams, only: [:index, :create, :show, :update]
   resources :users, only:[:show, :create]
   get "/users/:id/dreams", to: "users#get_user_dreams"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
