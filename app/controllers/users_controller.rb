@@ -1,4 +1,10 @@
 class UsersController < ApplicationController
+  def show
+    user = User.find(params[:id])
+
+    render json: user
+  end
+
   def login
     user = User.find_by(username: params[:username])
     if user && user.authenticate(params[:password])
@@ -26,6 +32,12 @@ class UsersController < ApplicationController
 			render json: {errors: user.errors.full_messages}
 		end
 	end
+
+  def get_user_dreams
+    dreams = User.find(params[:id]).dreams.order(created_at: :desc)
+
+    render json: dreams
+  end
 
   def auto_login
     user = session_user

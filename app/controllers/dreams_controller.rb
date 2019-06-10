@@ -1,6 +1,6 @@
 class DreamsController < ApplicationController
   def index
-    dreams = Dream.all
+    dreams = Dream.all.order(created_at: :desc)
     render json: dreams
   end
 
@@ -10,5 +10,7 @@ class DreamsController < ApplicationController
 
     render json: dream
   end
+
+
 
 end
