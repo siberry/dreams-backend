@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_07_140715) do
+ActiveRecord::Schema.define(version: 2019_06_12_150738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,14 @@ ActiveRecord::Schema.define(version: 2019_06_07_140715) do
     t.index ["user_id"], name: "index_dreams_on_user_id"
   end
 
+  create_table "follows", force: :cascade do |t|
+    t.bigint "user_id"
+    t.integer "followed_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_follows_on_user_id"
+  end
+
   create_table "specific_dream_tags", force: :cascade do |t|
     t.bigint "dream_id"
     t.bigint "dream_tag_id"
@@ -65,6 +73,7 @@ ActiveRecord::Schema.define(version: 2019_06_07_140715) do
   end
 
   add_foreign_key "dreams", "users"
+  add_foreign_key "follows", "users"
   add_foreign_key "specific_dream_tags", "dream_tags"
   add_foreign_key "specific_dream_tags", "dreams"
 end
