@@ -19,7 +19,12 @@ class DreamsController < ApplicationController
   def update
     dream = Dream.find(params[:id])
     dream.update(params.require(:dream).permit(:date, :hours_slept, :quality, :state_of_mind, :dream))
-    specific_tags = params.require(:tags).map { |tag_id| SpecificDreamTag.create(dream: dream, dream_tag_id: tag_id) }
+    dream.update(private: params.require(:privatePost))
+    specific_tags = params.require(:tags).map { |tag_id|
+      SpecificDreamTag.create(dream: dream, dream_tag_id: tag_id)
+    }
+
+    render json: dream
   end
 
 end

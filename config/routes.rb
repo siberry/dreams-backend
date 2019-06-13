@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :follows
-  # get "/dream_tags/:letter", to: "dream_tags#get_dreams_by_letter"
+  get "/dream_tags/alpha/:letter", to: "dream_tags#get_dreams_by_letter"
   # resources :specific_dream_tags
   resources :dreams, only: [:index, :create, :show, :update]
   resources :users, only:[:index, :show, :create]
