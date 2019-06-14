@@ -21,7 +21,7 @@ class DreamsController < ApplicationController
     dream.update(params.require(:dream).permit(:date, :hours_slept, :quality, :state_of_mind, :dream))
     dream.update(private: params.require(:privatePost))
     specific_tags = params.require(:tags).map { |tag_id|
-      SpecificDreamTag.create(dream: dream, dream_tag_id: tag_id)
+      SpecificDreamTag.find_or_create_by(dream: dream, dream_tag_id: tag_id)
     }
 
     render json: dream
