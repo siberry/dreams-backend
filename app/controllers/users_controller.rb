@@ -25,6 +25,15 @@ class UsersController < ApplicationController
     # render json: user && user.authenticate(params[:password])
   end
 
+  def change_password
+    # hash a user's password
+    password = Password.create(params[:password])
+
+    # store it safely
+    user = User.find(params[:id])
+    user.update_attribute(:password, password)
+  end
+
   def create
 		user = User.new(
 			username: params[:username],
