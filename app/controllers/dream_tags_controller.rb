@@ -4,6 +4,10 @@ class DreamTagsController < ApplicationController
     render json: dream_tags
   end
 
+  def create
+    DreamTag.create(params.permit("tag_name", "interpretation", "img_url"))
+  end
+
   def show
     dream_tag = DreamTag.find(params[:id])
     render json: dream_tag

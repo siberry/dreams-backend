@@ -1,3 +1,12 @@
+require 'rest-client'
+require 'json'
+require 'byebug'
+
+
+DreamTag.get_JSON_response("http://localhost:3000/dream_tags").each {|dream_tag|
+  DreamTag.post_to_heroku_db(dream_tag)
+}
+
 # alphabet = ('a'..'z').to_a
 #
 # alphabet.each { |letter|

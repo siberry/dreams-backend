@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :users, only:[:index, :show, :create]
   get "/users/:id/dreams", to: "users#get_user_dreams"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  resources :dream_tags, only:[:index, :show, :update]
+  resources :dream_tags, only:[:index, :show, :update, :create]
   post "/login", to: "users#login"
   get "/auto_login", to: "users#auto_login"
 end

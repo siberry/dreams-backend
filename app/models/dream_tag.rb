@@ -1,4 +1,27 @@
 class DreamTag < ApplicationRecord
+  def self.get_JSON_response(url) #returns array of webcam objects
+    response = RestClient.get(url,
+      headers={
+        "Content-Type": "application-json",
+        "Accept": "application-json"
+      }
+    )
+    parsed = JSON.parse(response)
+    return parsed
+  end
+
+  def DreamTag.post_to_heroku_db(payload)
+    RestClient.post(
+      "https://majestic-canyonlands-27127.herokuapp.com/dream_tags",
+      payload,
+      headers={
+        "Content-Type": "application-json",
+        "Accept": "application-json"
+      }
+    )
+  end
+
+  #using Nokogiri for initial local db
   def self.createDreamTagsFromPage(letter)
     source = "https://cafeausoul.com/dreams/dreamdictionary"
     base_url = "https://cafeausoul.com/dreams/dreamdictionary?letter="
