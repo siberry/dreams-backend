@@ -5,7 +5,9 @@ class DreamTagsController < ApplicationController
   end
 
   def create
-    DreamTag.create(params.permit("tag_name", "interpretation", "img_url"))
+    if !DreamTag.find_by("tag_name": params.permit("tag_name"))
+      DreamTag.create(params.permit("tag_name", "interpretation", "img_url"))
+    end
   end
 
   def show
@@ -24,5 +26,9 @@ class DreamTagsController < ApplicationController
     }
 
     render json: dream_tags
+  end
+
+  def delete_duplicates
+    byebug
   end
 end
