@@ -18,7 +18,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
     resource 'dreams',
       headers: :any,
       methods: [:get, :post, :delete, :patch, :put]
-    resource 'users,
+    resource 'users',
       headers: :any,
       methods: [:get, :patch, :put, :delete, :post]
   end
