@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get "/dream_tags/alpha/:letter", to: "dream_tags#get_dreams_by_letter"
   delete "/dream_tags/delete_duplicates", to: "dream_tags#delete_duplicates"
   # resources :specific_dream_tags
-  resources :dreams, only: [:index, :create, :show, :update]
+  resources :dreams, only: [:index, :create, :show, :update, :options]
   resources :users, only:[:index, :show, :create]
   get "/users/:id/dreams", to: "users#get_user_dreams"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
