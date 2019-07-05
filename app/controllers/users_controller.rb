@@ -32,8 +32,6 @@ class UsersController < ApplicationController
     # store it safely
     user = User.find(params[:id])
     user.update_attribute(:password_digest, password)
-    user.reload
-    db_password = Password.new(user.password)
 
     render json: {password: db_password}
   end
