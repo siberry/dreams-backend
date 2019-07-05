@@ -1,6 +1,6 @@
 require 'rest-client'
 require 'json'
-require 'byebug'
+# require 'byebug'
 
 
 DreamTag.get_JSON_response("http://localhost:3000/dream_tags").each {|dream_tag|
