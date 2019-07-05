@@ -27,6 +27,14 @@ class DreamTagsController < ApplicationController
   end
 
   def delete_duplicates
-    byebug
+    tag_names = []
+    DreamTag.all.each {|dream_tag|
+      if !tag_names.include?(dream_tag.tag_name)
+        tag_names << dream_tag.tag_name
+      else
+        puts "destroying #{dream_tag.tag_name}"
+        dream_tag.destroy
+      end
+    }
   end
 end

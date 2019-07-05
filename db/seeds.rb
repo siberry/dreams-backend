@@ -10,7 +10,6 @@ heroku_tag_names = heroku_tags.map {|dream_tag|
 
 DreamTag.get_JSON_response("http://localhost:3000/dream_tags").each {|dream_tag|
   if !heroku_tag_names.include?(dream_tag["tag_name"])
-    puts "not a duplicate!"
     DreamTag.post_to_heroku_db(dream_tag)
   end
 }
