@@ -5,9 +5,7 @@ class DreamTagsController < ApplicationController
   end
 
   def create
-    if !DreamTag.find_by("tag_name": params.permit("tag_name"))
-      DreamTag.create(params.permit("tag_name", "interpretation", "img_url"))
-    end
+    DreamTag.create(params.permit("tag_name", "interpretation", "img_url"))
   end
 
   def show
