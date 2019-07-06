@@ -11,7 +11,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
 
     resource '*',
       headers: :any,
-      methods: [:get, :post, :options, :put, :delete]
+      methods: [:get, :post, :options, :put, :patch, :delete]
 
     # resource 'follows',
     #   headers: :any,
