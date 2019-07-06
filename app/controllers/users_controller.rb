@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     if user && user.authenticate(params[:password])
       token = encode_token(user)
 
-			render json: {user: UserSerializer.new(user), token: token}
+			render json: {user: user, token: token}
     else
       render json: {errors: "username or password is incorrect"}
     end
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
 		if user.save
 			token = encode_token(user)
 
-			render json: {user: UserSerializer.new(user), token: token}
+			render json: {user: user, token: token}
 		else
 			render json: {errors: user.errors.full_messages}
 		end
