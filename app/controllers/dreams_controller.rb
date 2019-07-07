@@ -27,4 +27,9 @@ class DreamsController < ApplicationController
     render json: dream
   end
 
+  def make_private
+    dream = Dream.find(params[:id])
+    dream.private = true
+  end
+
 end
