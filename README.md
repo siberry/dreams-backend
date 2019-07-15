@@ -1,24 +1,7 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is "DreamCatchr" a web app which allows users to track their dreams and explore potential interpretations, read dreams of other users and follow users. It was built with React, Ruby on Rails, Nokogiri, the Artsy API.
 
-Things you may want to cover:
+The dream interpretations were scraped from https://cafeausoul.com, modified slightly, and paired with surreal imagery queried from the Artsy API. The DreamCatchr dream tags can be found at https://majestic-canyonlands-27127.herokuapp.com/dream_tags. The live frontend is available at https://dreamcatchr.herokuapp.com/.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Enjoy!
