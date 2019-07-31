@@ -60,10 +60,11 @@ class UsersController < ApplicationController
 
   def auto_login
     user = session_user
+    anon = User.find(8)
     if user
       render json: user
     else
-      render json: {errors: "User not logged in"}
+      render json: {anon}
     end
   end
 end
