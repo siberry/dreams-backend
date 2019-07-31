@@ -64,7 +64,7 @@ class UsersController < ApplicationController
     if user
       render json: user
     else
-      render json: {anon}
+      render json: anon
     end
   end
 end
