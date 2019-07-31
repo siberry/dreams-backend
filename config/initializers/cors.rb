@@ -7,23 +7,10 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins '*'
+    origins 'dreamcatchr.herokuapp.com', 'localhost:3001'
 
     resource '*',
       headers: :any,
       methods: [:get, :post, :options, :put, :patch, :delete]
-
-    # resource 'follows',
-    #   headers: :any,
-    #   methods: [:get, :post, :delete]
-    # resource 'dream_tags',
-    #   headers: :any,
-    #   methods: [:get]
-    # resource 'dreams',
-    #   headers: :any,
-    #   methods: [:get, :post, :delete, :patch, :put]
-    # resource 'users',
-    #   headers: :any,
-    #   methods: [:get, :patch, :put, :delete, :post, :options]
   end
 end
