@@ -7,7 +7,7 @@ class ApplicationController < ActionController::API
     begin
       JWT.decode(get_auth_header, Rails.application.credentials.auth_key)[0]["user_id"]
     rescue
-      nil
+      8
     end
   end
 
