@@ -1,5 +1,5 @@
 class DreamTag < ApplicationRecord
-  def self.get_JSON_response(url) #returns array of webcam objects
+  def self.get_JSON_response(url)
     response = RestClient.get(url)
     parsed = JSON.parse(response)
     return parsed
